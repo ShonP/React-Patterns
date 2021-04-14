@@ -7,7 +7,6 @@ import { persistStore } from 'redux-persist';
 import { ThemeProvider } from 'styled-components';
 import { Themes } from './shared/theme/themes';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import store from './shared/store/store';
 import { Provider } from 'react-redux';
