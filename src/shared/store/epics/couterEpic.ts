@@ -17,4 +17,6 @@ export const epic: Epic<AnyAction, AnyAction, RootState> = (
     })
   );
 
-export default [epic];
+const allEpics = [epic];
+
+export default allEpics;
