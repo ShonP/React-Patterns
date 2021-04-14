@@ -1,21 +1,37 @@
 import React from 'react';
+import { useTheming } from './shared/theme/useThemeing';
+import ThemeContext from './shared/theme/themeContext';
+import GlobalStyle from './shared/theme/GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+import { Themes } from './shared/theme/themes';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { store } from './app/store';
+import store from './shared/store/store';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+
+function ProvidedApp() {
+  const themingValue = useTheming(Themes.light);
+
+  return (
+    <Provider store={store}>
+      <ThemeContext.Provider value={themingValue}>
+        <ThemeProvider theme={themingValue.currentTheme}>
+          <>
+            <GlobalStyle />
+            <App />
+          </>
+        </ThemeProvider>
+      </ThemeContext.Provider>
+    </Provider>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ProvidedApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+export default App;
